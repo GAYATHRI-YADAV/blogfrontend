@@ -10,7 +10,7 @@ import { store } from './redux/store';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-  <HashRouter>
+  <HashRouter basename='/blogfrontend'>
     <React.StrictMode>
       <App />
     </React.StrictMode>
