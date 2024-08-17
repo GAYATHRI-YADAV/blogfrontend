@@ -1,76 +1,3 @@
-// // BlogContent.js
-// import React,{useState,useEffect} from "react";
-// import { useNavigate, useParams } from "react-router-dom";
-// import axios from 'axios';
-// import { IconButton,Box,Typography, Card, CardContent, CardMedia } from "@mui/material";
-// import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-
-// const BlogContent = () => {
-//   const [blog, setBlog] = useState([]);
-//   const id = useParams().id;
-//   const navigate = useNavigate();
-//   // const history = useHistory();
-
-//   const getBlog = async () => {
-//     try {
-//       const { data } = await axios.get(`/api/v1/blog/get-blog/${id}`);
-//       if (data?.success) {
-//         setBlog(data?.blog);
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     getBlog();
-//   }, [id]);
-
-//   const handleGoBack = () => {
-//     navigate('/blogs')
-//   };
-//   return (
-//     <div>
-//       <Box
-//         width={"50%"}
-//         border={3}
-//         borderRadius={10}
-//         padding={2}
-//         margin="auto"
-//         boxShadow={"10px 10px 20px #ccc"}
-//         display="flex"
-//         flexDirection={"column"}
-//         marginTop="30px"
-//         bgcolor="white"
-//       >
-//       <IconButton onClick={handleGoBack} style={{ alignSelf: 'flex-start', marginBottom: '-30px' }}>
-//         <ArrowBackIcon />
-//       </IconButton>
-//       {blog && (
-//       <Card>
-//           <Typography variant="h3" textAlign={"center"} component="div" sx={{fontWeight:'bold'}}>
-//               {blog.title}
-//             </Typography>
-//           <CardMedia
-//             component="img"
-//             height="194"
-//             image={blog.image}
-//             alt="Blog related image"
-//           />
-//           {/* <CardContent> */}
-//             <Typography variant="h6" //color="text.secondary" 
-//             fontFamily="Georgia, serif" color="black">
-//               {blog.content}
-//             </Typography>
-//           {/* </CardContent> */}
-//         </Card>
-//       )}
-//       </Box>
-//     </div>
-//   );
-// };
-
-// export default BlogContent;
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
@@ -94,10 +21,9 @@ const BlogContent = () => {
 // Display the date in YYYY-MM-DD format
 console.log(currentDate.toISOString().split('T')[0]);
 
-
   const getBlog = async () => {
     try {
-      const { data } = await axios.get(`https://innotech-blog-wqds.onrender.com/api/v1/blog/get-blog/${id}`);
+      const { data } = await axios.get(`https://blog-backend-fono.onrender.com/api/v1/blog/get-blog/${id}`);
       if (data?.success) {
         setBlog(data?.blog);
         setComments(data?.blog.comment || []); // Assuming your blog object has a 'comments' field
@@ -122,7 +48,7 @@ console.log(currentDate.toISOString().split('T')[0]);
 
   const handleSubmitComment = async () => {
     try {
-      const response = await axios.post(`https://innotech-blog-wqds.onrender.com/api/v1/blog/add-comment/${id}`, { username:username , comment: commentInput ,Date: currentDate});
+      const response = await axios.post(`https://blog-backend-fono.onrender.com/api/v1/blog/add-comment/${id}`, { username:username , comment: commentInput ,Date: currentDate});
       if (response.data?.success) {
         setComments([...comments, response.data.comment]); // Assuming the API returns the newly added comment
         setCommentInput('');
